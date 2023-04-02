@@ -1,0 +1,24 @@
+#!/bin/bash
+
+## BSPWM RULES ========================== #
+
+bspc rule -a Brave-browser desktop=^2 state=tiled follow=false
+bspc rule -a Microsoft-Edge desktop=^2 state=tiled follow=false
+bspc rule -a discord state=tiled desktop=^4 follow=false
+bspc rule -a TelegramDesktop state=floating desktop=^4 follow=false
+bspc rule -a Spotify state=tiled desktop=^5 follow=false
+bspc rule -a Rhythmbox state=tiled desktop=^5 follow=false
+bspc rule -a Code state=tiled desktop=^1 follow=on
+bspc rule -a Pulsemixer state=tiled desktop=^5 follow=on
+
+bspc rule -a vlc state=floating
+bspc rule -a "VirtualBox Manager" state=floating
+bspc rule -a Thunar state=floating follow=on
+bspc rule -a Lxappearance state=floating follow=on
+bspc rule -a Timeshift-gtk state=floating follow=on
+bspc rule -a Xfce4-power-manager-settings state=floating follow=on
+bspc rule -a Pavucontrol state=floating follow=on
+bspc rule -a stacer state=floating
+bspc rule -a Gpick state=floating follow=on
+bspc rule -a Gnome-calculator state=floating follow=on
+bspc rule -a File-roller state=floating follow=on

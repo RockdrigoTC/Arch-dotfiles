@@ -1,0 +1,267 @@
+## wm independent hotkeys ===============================
+
+# make sxhkd reload its configuration files:
+super + Escape
+    pkill -USR1 -x sxhkd
+
+## bspwm hotkeys ========================================
+
+# quit/restart bspwm
+super + alt + r
+    bspc wm -r
+
+# restart polybar
+super + shift + r
+    exec /home/rockdri/.config/polybar/launch.sh
+
+# close and kill
+super + q
+    bspc node -c
+
+# alternate between the tiled and monocle layout
+super + m
+    bspc desktop -l next
+
+# send the newest marked node to the newest preselected node
+super + y
+    bspc node newest.marked.local -n newest.!automatic.local
+
+# swap the current node and the biggest node
+super + shift + g
+    bspc node -s biggest
+
+# Flip layout vertically/horizontally
+super + {_,shift + }a
+    bspc node @/ --flip {vertical,horizontal}
+
+## state/flags ===========================================
+
+super + t
+    bspc node -t tiled
+# set the window state
+super + g
+    bspc node -t floating
+# set the window state
+super + f
+    bspc node -t fullscreen
+
+# set the node flags
+super + ctrl + {m,x,y,z}
+    bspc node -g {marked,locked,sticky,private}
+
+## focus/swap ============================================
+
+super + {_,shift + }{Left,Down,Up,Right}
+    bspc node -{f,s} {west,south,north,east}
+
+# focus the node for the given path jump
+super + {p,space,comma,period}
+    bspc node -f @{parent,brother,first,second}
+
+# focus the next/previous node in the current desktop
+super + {_,shift + }c
+    bspc node -f {next,prev}.local
+
+# focus the next/previous desktop in the current monitor
+super + bracket{left,right}
+    bspc desktop -f {prev,next}.local
+
+# focus the last node/desktop
+super + {grave,Tab}
+    bspc {node,desktop} -f last
+
+# focus the older or newer node in the focus history
+super + {o,i}
+    bspc wm -h off
+    bspc node {older,newer} -f
+    bspc wm -h on
+
+# focus or send to the given desktop
+super + {_,shift + }{1-9,0}
+    bspc {desktop -f,node -d} '^{1-9,10}'
+
+## preselect ==========================================
+
+# preselect the direction
+super + ctrl + alt + {Left,Down,Up,Right}
+    bspc node -p {west,south,north,east}
+
+# preselect the ratio
+super + ctrl + {1-9}
+    bspc node -o 0.{1-9}
+
+# cancel the preselection for the focused node
+super + ctrl + space
+    bspc node -p cancel
+
+# cancel the preselection for the focused desktop
+super + ctrl + alt + space  
+    bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
+
+## move/resize =============================================
+
+# move a floating window
+super + ctrl + {Left,Down,Up,Right}
+    bspc node -v {-20 0,0 20,0 -20,20 0}
+
+# Custom move/resize
+alt + super + {Left,Down,Up,Right}
+    ~/.config/bspwm/scripts/bspwm_resize {west,south,north,east}
+
+## launching programs =========================================
+
+#Launch Firefox
+#super + shift + f
+#	firefox
+
+#Launch Browser
+super + n
+    firefox
+
+#File Explorer(Thunar)
+super + e
+    thunar
+
+#LockScreen
+super + z
+    betterlockscreen -l blur
+
+#RedShift
+super + l
+    redshift -O 2400
+super + shift + l
+    redshift -x
+
+#Screenshots
+#super + s
+#    scrot ~/Screenshots/captura.jpg
+#super + shift + s
+#    scrot -s ~/Screenshots/captura.png
+
+Print
+    flameshot screen -p ~/Screenshots
+
+shift + Print
+    flameshot screen -c
+
+super + Print
+    flameshot gui
+
+# terminal emulator
+super + Return
+    alacritty
+
+#Ranger
+super + {r}
+    exec ~/.config/bspwm/scripts/ranger.sh
+
+## Rofi launchers ===========================================
+
+# run launcher
+super + b
+    exec ~/.config/rofi/launchers/launcher.sh
+
+# run launcher(root)
+super + alt + b
+    exec ~/.config/rofi/launchers/launcherRoot.sh
+
+# window switcher
+super + w
+    rofi -show window
+
+# powermenu
+super + x
+    exec ~/.config/rofi/launchers/rofi-powermenu.sh
+
+# clipboard
+super + v
+    exec ~/.config/rofi/launchers/rofi-greenclip.sh
+
+# Bluetooth
+super + shift + b
+    exec ~/.config/rofi/launchers/rofi-bluetooth.sh
+
+# Wifi
+super + shift + n
+    exec ~/.config/rofi/launchers/rofi-wifi.sh
+
+## system controls ==========================================
+
+# volume Controls
+shift + {Up, Down}
+    {pamixer -i 5, pamixer -d 5};\
+    ~/.config/dunst/scripts/volume.sh
+
+super + {F2,F3}
+    pactl set-sink-volume 0 {-5%, +5%};\
+    ~/.config/dunst/scripts/volume.sh
+
+super + {F1}
+    pactl set-sink-mute 0 toggle
+
+{XF86AudioRaiseVolume,XF86AudioLowerVolume}
+    {pamixer -i 5, pamixer -d 5};\
+    ~/.config/dunst/scripts/volume.sh
+
+{XF86AudioMute}
+    pactl set-sink-mute 0 toggle
+    ~/.config/dunst/scripts/volume.sh
+
+# brightness controls
+shift + {Right, Left}
+    {brightnessctl set +5%, brightnessctl set 5%-};\
+    ~/.config/dunst/scripts/brightness.sh screen
+
+shift + {XF86MonBrightnessUp, XF86MonBrightnessDown}
+    {brightnessctl set +5%, brightnessctl set 5%-};\
+    ~/.config/dunst/scripts/brightness.sh screen
+
+#Controles Multimedia
+
+super + {F6,F7,F8}
+    playerctl {previous,play-pause,next}
+
+{XF86AudioStop,XF86AudioPlay,XF86AudioPrev,XF86AudioNext}
+    playerctl {stop,play-pause,previous,next}
+
+#Misc
+super + ctrl + shift + 1
+    ~/.config/bspwm/scripts/onlyInternalMonitor.sh
+
+super + ctrl + shift + 2
+    ~/.config/bspwm/scripts/onlyExternalMonitor.sh
+
+super + ctrl + shift + 3
+    ~/.config/bspwm/scripts/mirrorMonitor.sh
+
+#Wallpaper Change
+super + alt + 1
+    echo ~/Pictures/Wallpapers/1.jpg >~/.config/.wallpaper;\
+    ~/.config/wal/scripts/takeColors.sh
+super + alt + 2
+    echo ~/Pictures/Wallpapers/2.jpg >~/.config/.wallpaper;\
+    ~/.config/wal/scripts/takeColors.sh
+super + alt + 3
+    echo ~/Pictures/Wallpapers/3.jpg >~/.config/.wallpaper;\
+    ~/.config/wal/scripts/takeColors.sh
+super + alt + 4
+    echo ~/Pictures/Wallpapers/4.jpg >~/.config/.wallpaper;\
+    ~/.config/wal/scripts/takeColors.sh
+super + alt + 5
+    echo ~/Pictures/Wallpapers/5.jpg >~/.config/.wallpaper;\
+    ~/.config/wal/scripts/takeColors.sh
+super + alt + 6
+    echo ~/Pictures/Wallpapers/6.jpg >~/.config/.wallpaper;\
+    ~/.config/wal/scripts/takeColors.sh
+super + alt + 7
+    echo ~/Pictures/Wallpapers/7.jpg >~/.config/.wallpaper;\
+    ~/.config/wal/scripts/takeColors.sh
+super + alt + 8
+    echo ~/Pictures/Wallpapers/8.jpg >~/.config/.wallpaper;\
+    ~/.config/wal/scripts/takeColors.sh
+super + alt + 9
+    echo ~/Pictures/Wallpapers/9.jpg >~/.config/.wallpaper;\
+    ~/.config/wal/scripts/takeColors.sh
+super + alt + 0
+    echo ~/Pictures/Wallpapers/0.jpg >~/.config/.wallpaper;\
+    ~/.config/wal/scripts/takeColors.sh

@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# ----------------------- #
+# BSPWM CONFIGURATION     # 
+# ----------------------- #
+
+xrandr --output eDP-1 --primary --auto --rotate normal
+bspc monitor HDMI-1 --remove
+xrandr --output HDMI-1 --off
+
+bspc monitor eDP-1 -d 1 2 3 4 5
+
+## BSPWM CONFIG ========================== # 
+~/.config/bspwm/scripts/bspcConfig
+
+## BSPWM RULES ========================== # 
+
+~/.config/bspwm/scripts/bspcRule
+
+## AUTOSTART PROGRAMS ======================== # 
+~/.config/bspwm/scripts/bspcPrograms "1"
+
+## BSPWM COLORS ======================== #
+. "${HOME}/.cache/wal/colors.sh"
+bspc config normal_border_color "$color1"
+bspc config active_border_color "$color1"
+bspc config focused_border_color "$color3"
+bspc config presel_feedback_color "$color3"

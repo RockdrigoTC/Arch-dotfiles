@@ -1,0 +1,26 @@
+#!/bin/bash
+
+## AUTOSTART PROGRAMS ======================== #
+killall greenclip &
+killall dunst &
+killall mpd &
+killall plank &
+killall picom
+
+pgrep -x sxhkd >/dev/null || sxhkd &
+setxkbmap es &
+wal -i $(cat ~/.config/.wallpaper) &
+betterlockscreen -u $(cat ~/.config/.wallpaper) &
+if [[ opt -eq 1 ]]; then
+    ~/.config/polybar/launch.sh &
+else
+    ~/.config/polybar/launchExternal.sh &
+fi
+picom --experimental-backends &
+xfce4-power-manager &
+xsetroot -cursor_name left_ptr &
+mpd &
+greenclip daemon &
+dunst -c ~/.config/dunst/dunstrc &
+ibus-daemon -drxR &
+plank &

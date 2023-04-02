@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Hotkeys</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                font-size: 16px;
+                line-height: 1.5;
+                background-color: #282a36;
+                color: #f8f8f2;
+                padding: 0;
+                margin: 0;
+            }
+            h1 {
+                font-size: 36px;
+                font-weight: bold;
+                text-align: center;
+                margin-top: 40px;
+                margin-bottom: 20px;
+                text-shadow: 1px 1px #44475a;
+            }
+            h2 {
+                font-size: 24px;
+                font-weight: bold;
+                margin-top: 30px;
+                margin-bottom: 10px;
+                color: #f1fa8c;
+                text-shadow: 1px 1px #44475a;
+            }
+            code {
+                font-family: monospace;
+                background-color: #44475a;
+                color: #f8f8f2;
+                padding: 5px;
+                border: 1px solid #6272a4;
+                border-radius: 3px;
+            }
+            pre {
+                background-color: #44475a;
+                color: #f8f8f2;
+                padding: 10px;
+                border: 1px solid #6272a4;
+                border-radius: 3px;
+                overflow: auto;
+            }
+        </style>
+</head>
+<body>
+	<h1>Hotkeys</h1>
+	<h2>wm independent hotkeys</h2>
+	<code># make sxhkd reload its configuration files:</code>
+	<pre>super + Escape
+    pkill -USR1 -x sxhkd</pre>
+	<h2>bspwm hotkeys</h2>
+	<code># quit/restart bspwm</code>
+	<pre>super + alt + r
+    bspc wm -r</pre>
+	<code># restart polybar</code>
+	<pre>super + shift + r
+    exec /home/rockdri/.config/polybar/launch.sh</pre>
+	<code># close and kill</code>
+	<pre>super + q
+    bspc node -c</pre>
+	<code># Flip layout vertically/horizontally</code>
+	<pre>super + {_,shift + }a
+    bspc node @/ --flip {vertical,horizontal}</pre>
+	<h2>state/flags</h2>
+	<code>super + t</code>
+	<pre>bspc node -t tiled</pre>
+	<code>super + g</code>
+	<pre>bspc node -t floating</pre>
+	<h2>Rofi launchers</h2>
+	<code># run launcher</code>
+	<pre>super + b
+    exec ~/.config/rofi/launchers/launcher.sh</pre>
+	<code># run launcher(root)</code>
+	<pre>super + alt + b
+    exec ~/.config/rofi/launchers/launcherRoot.sh</pre>
+</body>
+</html>
