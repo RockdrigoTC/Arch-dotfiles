@@ -1,10 +1,12 @@
 # Arch-dotfiles
 
-![image](/Images/image-1.png)
+<p align="center">
+  <img src="/Images/Arch-dotfiles.gif">
+</p>
 
-![image](/Images/image-4.png)
+<img src="Images/image-2.png" align="center" width=960 height=468>
 
-![image](/Images/image-3.png)
+<img src="Images/image-3.png" align="center" width=960 height=468>
 
 
 ## Dependencies
